@@ -1,3 +1,8 @@
+:root {
+  --gradient-theme: repeating-linear-gradient(135deg, #24A159 0 10px, #ffa516 0 20px) 0/0%   no-repeat;
+  --gradient-light: repeating-linear-gradient(135deg,#ddd    0 10px,#eee    0 20px) 0/100%;
+}
+
 /* loading.component.css */
 .loading-overlay {
   position: fixed;
@@ -12,16 +17,16 @@
   z-index: 1000;
 }
 
-.spinner {
-  border: 16px solid #f3f3f3; /* Light gray */
-  border-top: 16px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
+.loader {
+  width: 270px;
+  height: 25px;
+  border-radius: 15px;
+  background: var(--gradient-theme), var(--gradient-light);
+  animation: animate__progressBar 2s infinite;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@keyframes animate__progressBar {
+  100% {
+    background-size:100%
+  }
 }
