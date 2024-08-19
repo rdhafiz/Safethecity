@@ -1,0 +1,18 @@
+.home {
+  .header {
+    img {
+      max-width: 180px;
+      min-width: 180px;
+    }
+  }
+  .btn-theme {
+    transition: 0.3s all ease-in-out !important;
+    background-color: var(--theme) !important;
+    color: var(--bs-white) !important;
+    &:hover {
+      transition: 0.3s all ease-in-out !important;
+      background-color: var(--theme-dark) !important;
+    }
+  }
+
+}
