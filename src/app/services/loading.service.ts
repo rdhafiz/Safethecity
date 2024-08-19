@@ -6,7 +6,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LoadingService {
   private loadingSubject = new BehaviorSubject<boolean>(false);
+  private progressSubject = new BehaviorSubject<number>(0);
+
   loading$ = this.loadingSubject.asObservable();
+  progress$ = this.progressSubject.asObservable();  // Changed to 'progress$' for consistency
 
   show() {
     this.loadingSubject.next(true);
@@ -14,5 +17,9 @@ export class LoadingService {
 
   hide() {
     this.loadingSubject.next(false);
+  }
+
+  setProgress(progress: number) {
+    this.progressSubject.next(progress);
   }
 }
