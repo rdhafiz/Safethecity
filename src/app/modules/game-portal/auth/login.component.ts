@@ -2,6 +2,7 @@
 import {Component} from "@angular/core";
 import {NgOptimizedImage} from "@angular/common";
 import {LoadingService} from "../../../services/loading.service";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -12,15 +13,25 @@ import {LoadingService} from "../../../services/loading.service";
   standalone: true
 })
 export class LoginComponent {
-  constructor(private loadingService: LoadingService) {
-    setTimeout(() => {
-      this.loadData()
-    },3000)
+  param:any = {
+    username:'',
+    telegram_id:'',
+}
+  constructor(private loadingService: LoadingService,private authService: AuthService) {
+
   }
 
-  loadData() {
-    this.loadingService.show();
+  async initializeUser(username:string,telegram_id:string){
+    try {
+      await this.authService.login(this.param.telegram_id, this.param.username);
+      // Handle successful registration
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
+  }
 
+  loading() {
+    this.loadingService.show();
     // Simulate an async operation like an HTTP request
     setTimeout(() => {
       this.loadingService.hide();
