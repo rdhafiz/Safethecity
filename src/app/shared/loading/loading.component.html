@@ -1,4 +1,6 @@
 <!-- loading.component.html -->
-<div class="loading-overlay" *ngIf="isLoading">
+@if (isLoading) {
+<div class="loading-overlay" >
   <div class="spinner"></div>
 </div>
+}
