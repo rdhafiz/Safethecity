@@ -1,14 +1,15 @@
 import { Component, OnDestroy } from "@angular/core";
 import { NgOptimizedImage } from "@angular/common";
-import { LoadingService } from "../../../services/loading.service";
+import {HeaderComponent} from "../includes/header.component";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   imports: [
-    NgOptimizedImage
+    NgOptimizedImage,
+    HeaderComponent
   ],
-  standalone: true
+  standalone: true,
 })
 export class HomeComponent   {
 
