@@ -21,6 +21,7 @@ export class LoadingComponent implements OnInit {
     this.loadingService.loading$.subscribe(
       (loading: boolean) => (this.isLoading = loading)
     );
+    
     this.loadingService.progress$.subscribe(
       (progress: number) => (this.progress = progress)
     );
