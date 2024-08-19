@@ -1,15 +1,11 @@
-import { Component, OnDestroy } from "@angular/core";
-import {CommonModule, NgOptimizedImage} from "@angular/common";
-import { LoadingService } from "../../../services/loading.service";
+import { Component } from "@angular/core";
+import {CommonModule} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {HeaderComponent} from "../includes/header.component";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  imports: [CommonModule, RouterLink, RouterLinkActive, HeaderComponent],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   standalone: true
 })
-export class HomeComponent   {
-
-}
+export class HomeComponent {  }
