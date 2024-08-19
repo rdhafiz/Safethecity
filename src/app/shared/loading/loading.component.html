@@ -1,6 +1,16 @@
 <!-- loading.component.html -->
 @if (isLoading) {
-<div class="loading-overlay" >
-  <div class="loader"></div>
+<div class="loading-overlay" style="background-image: url(/assets/images/ground-green.png)">
+  <div class="text-center">
+    <div class="logo mb-4">
+      <img [src]="'/assets/logo/logo.png'" class="img-fluid object-fit-contain" width="250" alt="logo">
+    </div>
+    <div class="loader mb-2">
+      <div class="bar" [ngStyle]="{width:progress + '%'}"></div>
+    </div>
+    <div class="text-white fs-4 text-center ">
+      Loading
+    </div>
+  </div>
 </div>
 }
