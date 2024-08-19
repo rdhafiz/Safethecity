@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from "@angular/core";
 import { NgOptimizedImage } from "@angular/common";
 import { LoadingService } from "../../../services/loading.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,13 +11,12 @@ import { LoadingService } from "../../../services/loading.service";
   ],
   standalone: true
 })
-export class LoginComponent implements OnDestroy {
+export class LoginComponent   {
   duration: number = 20; // seconds
   progress: number = 0;
   progressPercentage: number = 0;
   progressInterval: any = null;
-
-  constructor(private loadingService: LoadingService) {
+  constructor(private loadingService: LoadingService, private route:Router) {
     this.loadData();
   }
 
@@ -43,6 +43,7 @@ export class LoginComponent implements OnDestroy {
     }
     this.progress = this.duration; // Ensure progress is set to 100%
     this.loadingService.hide();
+    this.route.navigate(['/home']);
   }
 
   ngOnDestroy() {
