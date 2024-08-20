@@ -6,6 +6,10 @@ import {LayoutComponent} from "./modules/game-portal/layout/layout.component";
 
 export const routes: Routes = [
   {
+    path:'',
+    component: LoginComponent,
+  },
+  {
     path: 'portal',
     component:LayoutComponent,
     children:[
@@ -18,10 +22,6 @@ export const routes: Routes = [
         component: GameComponent
       },
     ]
-  },
-  {
-    path:'',
-    component: LoginComponent,
   },
 
 ];

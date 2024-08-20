@@ -1,7 +1,10 @@
 .header {
-  height: 130px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   img {
-    max-width: 180px;
-    min-width: 180px;
+    max-width: 250px;
+    width: 100%;
   }
 }

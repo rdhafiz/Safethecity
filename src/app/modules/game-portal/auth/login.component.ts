@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   standalone: true
 })
 export class LoginComponent   {
-  duration: number = 20; // seconds
+  duration: number = 3; // seconds
   progress: number = 0;
   progressPercentage: number = 0;
   progressInterval: any = null;
@@ -43,7 +43,7 @@ export class LoginComponent   {
     }
     this.progress = this.duration; // Ensure progress is set to 100%
     this.loadingService.hide();
-    this.route.navigate(['/home']);
+    this.route.navigate(['/portal']);
   }
 
   ngOnDestroy() {
