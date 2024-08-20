@@ -1,7 +1,9 @@
 import { Component, OnDestroy } from "@angular/core";
 import { NgOptimizedImage } from "@angular/common";
 import { LoadingService } from "../../../services/loading.service";
+
 import {AuthService} from "../../../services/auth/auth.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +24,7 @@ export class LoginComponent {
     telegram_id:'',
 }
   constructor(private loadingService: LoadingService,private authService: AuthService) {
+
     this.loadData();
   }
 
@@ -56,6 +59,7 @@ export class LoginComponent {
     }
     this.progress = this.duration; // Ensure progress is set to 100%
     this.loadingService.hide();
+    this.route.navigate(['/portal']);
   }
 
   ngOnDestroy() {

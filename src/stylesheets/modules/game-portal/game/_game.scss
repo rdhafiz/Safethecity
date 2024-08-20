@@ -1,0 +1,18 @@
+.game{
+  height: calc(100vh - 80px);
+  .game-stage{
+    width: 100%;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    img{
+      width: 33.33%;
+      height: 33.33%;
+      object-fit: cover;
+      border: 1px solid white;
+    }
+  }
+}
