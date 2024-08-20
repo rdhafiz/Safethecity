@@ -1,6 +1,8 @@
-import {Component, OnInit, Output, EventEmitter, Input} from "@angular/core";
+import {Component, OnInit, Output, EventEmitter, Input, ElementRef, ViewChild} from "@angular/core";
 import {Router} from "@angular/router";
 import {NgClass} from "@angular/common";
+
+declare var window:any;
 
 @Component({
   selector: 'app-stage-one',
@@ -69,8 +71,10 @@ export class StageOneComponent implements OnInit {
   }
 
   showSuccess() {
-    alert('Success! All images were clicked in time.');
-    this.stage.emit(1)
+    const modal = new window.bootstrap.Modal("#stageModal", {keyboard: false})
+    modal.show();
+    this.stage.emit(1);
+    // alert('Success! All images were clicked in time.');
   }
 
   showError() {
