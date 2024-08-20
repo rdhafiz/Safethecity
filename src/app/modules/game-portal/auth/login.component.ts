@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from "@angular/core";
 import { NgOptimizedImage } from "@angular/common";
 import { LoadingService } from "../../../services/loading.service";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -10,16 +11,28 @@ import { LoadingService } from "../../../services/loading.service";
   ],
   standalone: true
 })
-export class LoginComponent implements OnDestroy {
+export class LoginComponent {
   duration: number = 20; // seconds
   progress: number = 0;
   progressPercentage: number = 0;
   progressInterval: any = null;
 
-  constructor(private loadingService: LoadingService) {
+  param:any = {
+    username:'',
+    telegram_id:'',
+}
+  constructor(private loadingService: LoadingService,private authService: AuthService) {
     this.loadData();
   }
 
+  async initializeUser(username:string,telegram_id:string){
+    try {
+      await this.authService.login(this.param.telegram_id, this.param.username);
+      // Handle successful registration
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
+  }
   loadData() {
     this.loadingService.show();
     this.progressInterval = setInterval(() => {
