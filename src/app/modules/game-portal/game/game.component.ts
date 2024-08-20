@@ -21,8 +21,9 @@ export class GameComponent   {
   progress: number = 0;
   progressPercentage: number = 0;
   progressInterval: any = null;
-  stages: any = [1,2,3,4];
-  selectedStage: number = 1; // can be from 1 to 4
+  stages: any = [1,2,3];
+  stagesDuration: any = [20,15,10];
+  selectedStage: number = 0; // can be from 1 to 4
   constructor(private loadingService: LoadingService, private route:Router) {
     this.loadData();
   }
@@ -37,7 +38,6 @@ export class GameComponent   {
         this.completeProgress();
       }
     }, 1000);
-
     setTimeout(() => {
       this.completeProgress();
     }, this.duration * 1000);
@@ -54,6 +54,11 @@ export class GameComponent   {
   }
   changeStage(stage:number = 0){
     this.selectedStage = stage
-    this.loadData()
+    if(this.stages[this.selectedStage] != undefined){
+      this.loadData()
+    }else{
+      this.route.navigate(['/portal'])
+    }
+
   }
 }

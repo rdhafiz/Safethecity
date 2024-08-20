@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter} from "@angular/core";
+import {Component, OnInit, Output, EventEmitter, Input} from "@angular/core";
 import { Router } from "@angular/router";
 import {NgClass} from "@angular/common";
 
@@ -12,6 +12,7 @@ import {NgClass} from "@angular/common";
 })
 export class StageThreeComponent implements OnInit {
   @Output() stage = new EventEmitter();
+  @Input() duration:number = 10;
   images: any[] = [
     { src: 'tree-3.png', id: 1, clicked: false },
     { src: 'tree-3.png', id: 2, clicked: false },
@@ -28,7 +29,6 @@ export class StageThreeComponent implements OnInit {
    clickedImages: Set<number> = new Set();
    timerStarted: boolean = false;
    timeoutId: any;
-   duration:number = 3;
 
   constructor(private route: Router) {}
 
@@ -69,6 +69,7 @@ export class StageThreeComponent implements OnInit {
 
   showSuccess() {
     alert('Success! All images were clicked in time.');
+    this.stage.emit(3)
   }
 
   showError() {

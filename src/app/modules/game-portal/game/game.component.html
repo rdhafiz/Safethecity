@@ -1,12 +1,12 @@
 <div class="game w-100 h-100">
   <!--Stage One-->
-  @if(selectedStage == 1){
-    <app-stage-one (stage)="changeStage($event)"></app-stage-one>
+  @if(stages[selectedStage] == 1){
+    <app-stage-one (stage)="changeStage($event)" [duration]="stagesDuration[selectedStage]"></app-stage-one>
   }
-  @if(selectedStage == 2){
-    <app-stage-two (stage)="changeStage($event)"></app-stage-two>
+  @if(stages[selectedStage] == 2){
+    <app-stage-two (stage)="changeStage($event)" [duration]="stagesDuration[selectedStage]"></app-stage-two>
   }
-  @if(selectedStage == 3){
-    <app-stage-three (stage)="changeStage($event)"></app-stage-three>
+  @if(stages[selectedStage] == 3){
+    <app-stage-three (stage)="changeStage($event)" [duration]="stagesDuration[selectedStage]"></app-stage-three>
   }
 </div>
