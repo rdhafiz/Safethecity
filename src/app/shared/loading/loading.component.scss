@@ -20,6 +20,7 @@
     position: relative;
     background-color: #fff;
     .bar{
+      transition: all .2s ease;
       width: 0;
       height: 100%;
       border-radius: 15px;

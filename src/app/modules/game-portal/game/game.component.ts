@@ -18,13 +18,14 @@ import {PopupComponent} from "./stages/popup/popup.component";
   standalone: true
 })
 export class GameComponent   {
-  @ViewChild(StageOneComponent) private StageOneComponent: any = StageOneComponent;
+  @ViewChild(PopupComponent) private PopupComponent: any = PopupComponent;
   duration: number = 3; // seconds
   progress: number = 0;
   progressPercentage: number = 0;
   progressInterval: any = null;
   stages: any = [1,2,3];
   stagesDuration: any = [20,15,10];
+  selectNextStage: number = 0 ; // can be from 0 to 3
   selectedStage: number = 0 ; // can be from 0 to 3
   constructor(private loadingService: LoadingService, private route:Router) {
     this.loadData();
@@ -56,12 +57,15 @@ export class GameComponent   {
     this.loadingService.hide();
   }
   changeStage(stage:number = 0){
-    this.selectedStage = stage
+    this.selectNextStage = stage
+    this.PopupComponent.openModal()
+  }
+  nextStage(){
+    this.selectedStage = this.selectNextStage;
     if(this.stages[this.selectedStage] != undefined){
       this.loadData()
     }else{
       this.route.navigate(['/portal'])
     }
-
   }
 }

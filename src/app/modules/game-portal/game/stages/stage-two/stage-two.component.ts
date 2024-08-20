@@ -68,12 +68,11 @@ export class StageTwoComponent implements OnInit {
   }
 
   showSuccess() {
-    alert('Success! All images were clicked in time.');
     this.stage.emit(2)
   }
 
   showError() {
-    alert('Error! Not all images were clicked in time.');
+    console.log('Error! Not all images were clicked in time.');
   }
   reset(){
     this.images.forEach((v:any) => {

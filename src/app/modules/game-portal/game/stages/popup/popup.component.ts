@@ -1,14 +1,21 @@
-import { Component } from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import { LoadingService } from "../../../../../services/loading.service";
 import { Router } from "@angular/router";
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'app-game-popup',
   templateUrl: './popup.component.html',
-  imports: [],
+  imports: [
+    NgClass
+  ],
   standalone: true
 })
 export class PopupComponent {
+  @Output() clickEvent = new EventEmitter();
+  @Input() icon :any = ''
+  @Input() title :any = 'Success!'
+  @Input() subTitle :any = 'You have successfully planted grass'
   private myModal: any;
 
   constructor(private loadingService: LoadingService, private route: Router) {}
@@ -31,5 +38,10 @@ export class PopupComponent {
 
       this.myModal.show();
     }
+  }
+
+  nextStage(){
+    this.closeModel()
+    this.clickEvent.emit()
   }
 }

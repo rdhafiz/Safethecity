@@ -71,13 +71,11 @@ export class StageOneComponent implements OnInit {
   }
 
   showSuccess() {
-    const modal = new window.bootstrap.Modal("#stageModal", {keyboard: false})
-    modal.show();
     this.stage.emit(1);
   }
 
   showError() {
-    alert('Error! Not all images were clicked in time.');
+    console.log('Error! Not all images were clicked in time.');
   }
 
   reset() {
