@@ -23,12 +23,14 @@ export class GameComponent   {
   progressInterval: any = null;
   stages: any = [1,2,3];
   stagesDuration: any = [20,15,10];
-  selectedStage: number = 0; // can be from 1 to 4
+  selectedStage: number = 0 ; // can be from 0 to 3
   constructor(private loadingService: LoadingService, private route:Router) {
     this.loadData();
   }
 
   loadData() {
+    this.progressPercentage = 0;
+    this.progress = 0;
     this.loadingService.show();
     this.progressInterval = setInterval(() => {
       this.progress++;
@@ -50,7 +52,6 @@ export class GameComponent   {
     }
     this.progress = this.duration; // Ensure progress is set to 100%
     this.loadingService.hide();
-
   }
   changeStage(stage:number = 0){
     this.selectedStage = stage
