@@ -38,8 +38,16 @@ export class GameComponent {
   // Index of the currently selected stage
   selectedStage: number = 0; // can be from 0 to 3
 
+  images:any[] = [];
+
+  defaultImage:string = ''
+
+  changeImageTo:string = ''
+
   constructor(private loadingService: LoadingService, private route: Router) {
+    this.selectImage();
     this.pageLoading();
+
   }
 
   // Function to handle the loading screen
@@ -109,12 +117,45 @@ export class GameComponent {
     this.progress = 0;
     this.progressPercentage = 0;
     this.selectedStage = this.selectNextStage;
+    this.selectImage(this.selectedStage)
     // Check if the selected stage is valid
     if (this.stages[this.selectedStage] !== undefined) {
       this.pageLoading();
     } else {
       // Navigate to the '/portal' route if the stage is invalid
       this.route.navigate(['/portal']);
+    }
+  }
+
+  selectImage(stage:number = 0){
+    this.images = []
+    this.selectedStage = stage;
+    if (this.selectedStage == 0){
+      this.defaultImage = 'ground.png'
+      this.changeImageTo = 'ground-green.png'
+      for (let i = 0; i < 9; i++) {
+        this.images.push(
+          {src: 'ground.png', id: (i + 1), clicked: false},
+        )
+      }
+    }
+    if (this.selectedStage == 1){
+      this.defaultImage = 'ground-green.png'
+      this.changeImageTo = 'tree-3.png'
+      for (let i = 0; i < 9; i++) {
+        this.images.push(
+          {src: 'ground-green.png', id: (i + 1), clicked: false},
+        )
+      }
+    }
+    if (this.selectedStage == 2){
+      this.defaultImage = 'tree-3.png'
+      this.changeImageTo = 'house.png'
+      for (let i = 0; i < 9; i++) {
+        this.images.push(
+          {src: 'tree-3.png', id: (i + 1), clicked: false},
+        )
+      }
     }
   }
 }

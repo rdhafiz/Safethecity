@@ -13,17 +13,9 @@ import {NgClass} from "@angular/common";
 export class StageTwoComponent implements OnInit {
   @Output() stage = new EventEmitter();
   @Input() duration:number = 15;
-  images: any[] = [
-    { src: 'ground-green.png', id: 1, clicked: false },
-    { src: 'ground-green.png', id: 2, clicked: false },
-    { src: 'ground-green.png', id: 3, clicked: false },
-    { src: 'ground-green.png', id: 4, clicked: false },
-    { src: 'ground-green.png', id: 5, clicked: false },
-    { src: 'ground-green.png', id: 6, clicked: false },
-    { src: 'ground-green.png', id: 7, clicked: false },
-    { src: 'ground-green.png', id: 8, clicked: false },
-    { src: 'ground-green.png', id: 9, clicked: false },
-  ];
+  @Input() images: any[] = [];
+  @Input() defaultImage: string = '';
+  @Input() changeImageTo: string = '';
 
    totalImages: number = 9;
    clickedImages: Set<number> = new Set();
@@ -45,7 +37,7 @@ export class StageTwoComponent implements OnInit {
       }
 
       // Change the image source
-      img.src = 'tree-3.png';
+      img.src = this.changeImageTo;
       img.clicked = true;
       this.clickedImages.add(img.id);
 
@@ -76,7 +68,7 @@ export class StageTwoComponent implements OnInit {
   }
   reset(){
     this.images.forEach((v:any) => {
-      v.src = 'ground-green.png';
+      v.src = this.defaultImage;
       v.clicked = false;
     })
     this.clickedImages.clear()
