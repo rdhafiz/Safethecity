@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {StageOneComponent} from "./stages/stage-one/stage-one.component";
 import {StageTwoComponent} from "./stages/stage-two/stage-two.component";
 import {StageThreeComponent} from "./stages/stage-three/stage-three.component";
+import {PopupComponent} from "./stages/popup/popup.component";
 
 @Component({
   selector: 'app-game',
@@ -12,6 +13,7 @@ import {StageThreeComponent} from "./stages/stage-three/stage-three.component";
     StageOneComponent,
     StageTwoComponent,
     StageThreeComponent,
+    PopupComponent,
   ],
   standalone: true
 })

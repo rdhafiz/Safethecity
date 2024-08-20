@@ -9,4 +9,3 @@ export const appConfig: { imports: any[]; providers: EnvironmentProviders[] } = 
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(),],
   imports:[LoadingComponent]
 };
-
