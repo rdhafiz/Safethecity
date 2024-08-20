@@ -2,6 +2,6 @@
 <!--Stage One-->
 <div class="game-stage stage-one">
   @for (img of images; track img.id) {
-    <img [src]="'./assets/images/'+img.src" class="ground ground-1" [ngClass]="{'border-0': img.clicked}" [alt]="'ground ' + img.id " (click)="changeLand(img)">
+    <img [src]="'./assets/images/'+img.src" class="ground ground-1" [ngClass]="{'border-0': img.clicked}" [alt]="'ground ' + img.id " (click)="changeLand(img)" style="object-fit: cover">
   }
 </div>

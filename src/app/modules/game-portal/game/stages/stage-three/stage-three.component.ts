@@ -1,37 +1,36 @@
 import {Component, OnInit, Output, EventEmitter} from "@angular/core";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 import {NgClass} from "@angular/common";
 
 @Component({
-  selector: 'app-stage-one',
-  templateUrl: './stage-one.component.html',
+  selector: 'app-stage-three',
+  templateUrl: './stage-three.component.html',
   imports: [
     NgClass
   ],
   standalone: true
 })
-export class StageOneComponent implements OnInit {
+export class StageThreeComponent implements OnInit {
   @Output() stage = new EventEmitter();
   images: any[] = [
-    {src: 'ground.png', id: 1, clicked: false},
-    {src: 'ground.png', id: 2, clicked: false},
-    {src: 'ground.png', id: 3, clicked: false},
-    {src: 'ground.png', id: 4, clicked: false},
-    {src: 'ground.png', id: 5, clicked: false},
-    {src: 'ground.png', id: 6, clicked: false},
-    {src: 'ground.png', id: 7, clicked: false},
-    {src: 'ground.png', id: 8, clicked: false},
-    {src: 'ground.png', id: 9, clicked: false},
+    { src: 'tree-3.png', id: 1, clicked: false },
+    { src: 'tree-3.png', id: 2, clicked: false },
+    { src: 'tree-3.png', id: 3, clicked: false },
+    { src: 'tree-3.png', id: 4, clicked: false },
+    { src: 'tree-3.png', id: 5, clicked: false },
+    { src: 'tree-3.png', id: 6, clicked: false },
+    { src: 'tree-3.png', id: 7, clicked: false },
+    { src: 'tree-3.png', id: 8, clicked: false },
+    { src: 'tree-3.png', id: 9, clicked: false },
   ];
 
-  totalImages: number = 9;
-  clickedImages: Set<number> = new Set();
-  timerStarted: boolean = false;
-  timeoutId: any;
-  duration: number = 3;
+   totalImages: number = 9;
+   clickedImages: Set<number> = new Set();
+   timerStarted: boolean = false;
+   timeoutId: any;
+   duration:number = 3;
 
-  constructor(private route: Router) {
-  }
+  constructor(private route: Router) {}
 
   ngOnInit() {
     // No initial timer; will be started on first click
@@ -46,7 +45,7 @@ export class StageOneComponent implements OnInit {
       }
 
       // Change the image source
-      img.src = 'ground-green.png';
+      img.src = 'house.png';
       img.clicked = true;
       this.clickedImages.add(img.id);
 
@@ -70,16 +69,14 @@ export class StageOneComponent implements OnInit {
 
   showSuccess() {
     alert('Success! All images were clicked in time.');
-    this.stage.emit(2)
   }
 
   showError() {
     alert('Error! Not all images were clicked in time.');
   }
-
-  reset() {
-    this.images.forEach((v: any) => {
-      v.src = 'ground.png';
+  reset(){
+    this.images.forEach((v:any) => {
+      v.src = 'tree-3.png';
       v.clicked = false;
     })
     this.clickedImages.clear()
