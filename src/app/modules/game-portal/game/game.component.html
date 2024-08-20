@@ -1,15 +1,20 @@
-<div class="game w-100 h-100">
-  <!--Stage One-->
-  @if(stages[selectedStage] == 1){
-    <app-stage-one (stage)="changeStage($event)" [images]="images" [defaultImage]="defaultImage" [changeImageTo]="changeImageTo" [duration]="stagesDuration[selectedStage]"></app-stage-one>
-  }
-  @if(stages[selectedStage] == 2){
-    <app-stage-two (stage)="changeStage($event)"  [images]="images" [defaultImage]="defaultImage" [changeImageTo]="changeImageTo" [duration]="stagesDuration[selectedStage]"></app-stage-two>
-  }
-  @if(stages[selectedStage] == 3){
-    <app-stage-three (stage)="changeStage($event)"  [images]="images" [defaultImage]="defaultImage" [changeImageTo]="changeImageTo"  [duration]="stagesDuration[selectedStage]"></app-stage-three>
-  }
+@if (!loading && userInfo != null && progressInterval == null) {
+  <div class="game w-100 h-100">
+    <!--Stage One-->
+    @if (stages[selectedStage] == 1) {
+      <app-stage-one (stage)="changeStage($event)" [images]="images" [defaultImage]="defaultImage"
+                     [changeImageTo]="changeImageTo" [duration]="stagesDuration[selectedStage]"></app-stage-one>
+    }
+    @if (stages[selectedStage] == 2) {
+      <app-stage-two (stage)="changeStage($event)" [images]="images" [defaultImage]="defaultImage"
+                     [changeImageTo]="changeImageTo" [duration]="stagesDuration[selectedStage]"></app-stage-two>
+    }
+    @if (stages[selectedStage] == 3) {
+      <app-stage-three (stage)="changeStage($event)" [images]="images" [defaultImage]="defaultImage"
+                       [changeImageTo]="changeImageTo" [duration]="stagesDuration[selectedStage]"></app-stage-three>
+    }
 
+    <app-game-popup (clickEvent)="nextStage()"></app-game-popup>
+  </div>
 
-  <app-game-popup (clickEvent)="nextStage()"></app-game-popup>
-</div>
+}
