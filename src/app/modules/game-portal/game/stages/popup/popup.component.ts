@@ -26,7 +26,7 @@ export class PopupComponent {
     }
   }
 
-  openModal() {
+  openModal(param:any = null) {
     const bootstrap = (window as any).bootstrap;
     const modalElement = document.getElementById('stageModal');
 
@@ -37,6 +37,9 @@ export class PopupComponent {
       });
 
       this.myModal.show();
+
+      this.title = param.title
+      this.subTitle = param.subTitle
     }
   }
 
