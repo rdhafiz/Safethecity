@@ -1,13 +1,9 @@
 .header {
-  height: 80px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   img {
-    max-width: 350px;
-    width: 100%;
-    @media screen and (max-width: 576px) {
-      max-width: 250px;
-    }
+    width: 150px;
   }
 }
