@@ -23,7 +23,29 @@
         max-width: 85%;
       }
       @media screen and (max-width: 375px) {
-        max-width: 100%;
+        width: 100%;
+      }
+      .box {
+        width: 33.33%;
+        min-height: 106.97px;
+        border: 1px solid var(--bs-white);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 25px;
+        font-weight: bold;
+        color: var(--bs-white);
+
+        @media screen and (min-width: 1024px) {
+          height: 168px;
+        }
+        @media screen and (max-width: 991px) {
+          height: 106.97px;
+        }
+        @media screen and (max-width: 301px) {
+          min-height: 84.98px;
+        }
+
       }
       img{
         width: 33.33%;

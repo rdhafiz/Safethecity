@@ -3,6 +3,7 @@ import {LoginComponent} from "./modules/game-portal/auth/login.component";
 import {HomeComponent} from "./modules/game-portal/home/home.component";
 import {GameComponent} from "./modules/game-portal/game/game.component";
 import {LayoutComponent} from "./modules/game-portal/layout/layout.component";
+import {StagesComponent} from "./modules/game-portal/game/stages/stages/stages.component";
 
 export const routes: Routes = [
   {
@@ -23,5 +24,8 @@ export const routes: Routes = [
       },
     ]
   },
-
+  {
+    path: 'stages',
+    component: StagesComponent
+  }
 ];
