@@ -4,9 +4,27 @@
     <div class="stage-parse w-100">
       <div class="box-container">
         @for (item of totalStages; track item.stage) {
-          <a [routerLink]="'/portal/stages/'+item.stage" class="box" [ngClass]="{'disabled':item.completed}">
-            {{ item.name }}
-          </a>
+          @if (item.completed) {
+            <div class="box position-relative" [ngClass]="{'disabled' : item.completed}">
+              <div
+                class="position-absolute top-0 bottom-0 start-0 end-0 d-flex justify-content-center align-items-center">
+                <svg viewBox="0 0 24 24" style="width: 45px; height: 45px;" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="#008000" stroke-width="2" stroke-linecap="round"
+                          stroke-linejoin="round"></path>
+                  </g>
+                </svg>
+              </div>
+              {{ item.name }}
+            </div>
+          } @else {
+            <a [routerLink]="'/portal/stages/'+item.stage" class="box" [ngClass]="{'d-none':item.completed}">
+              {{ item.name }}
+            </a>
+          }
         }
       </div>
     </div>

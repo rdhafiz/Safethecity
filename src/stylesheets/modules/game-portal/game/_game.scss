@@ -6,8 +6,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     .stage-parse {
-      max-width: 45%;
+      max-width: 35%;
       height: auto;
       display: flex;
       justify-content: center;
