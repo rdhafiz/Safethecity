@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import {CookieService} from "../cookies/cookie.service";
 import * as localforage from "localforage";
+import {StorageService} from "../storage/storage.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserInfoService {
   private userInfo: any = null;
+  private isBrowser: boolean;
 
-  constructor(private cookieService: CookieService) {
-    this.loadUserInfo();
+  constructor() {
+    this.isBrowser = typeof window !== 'undefined';
+
+    this.loadUserInfo().then(r => {});
   }
 
-  private loadUserInfo(): void {
-    localforage.getItem('userInfo', (err, value) => {
-      // if err is non-null, we got an error. otherwise, value is the value
-      let storageData:any = value;
-      if (storageData != null) {
-        this.userInfo = JSON.parse(storageData);
+  private async loadUserInfo(): Promise<void> {
+   localforage.getItem('userInfo').then((value:any) => {
+      if (value != null) {
+        console.log(value)
+        this.userInfo = JSON.parse(value);
       } else {
         // Initialize with default values if needed
         this.userInfo = {
@@ -25,9 +28,11 @@ export class UserInfoService {
           telegram_id: '12346879654365',
           stage: 0,
         };
-        localforage.setItem('userInfo', JSON.stringify(this.userInfo));
+         localforage.setItem('userInfo', JSON.stringify(this.userInfo));
       }
     });
+
+
 
   }
 
@@ -35,8 +40,8 @@ export class UserInfoService {
     return this.userInfo;
   }
 
-  setUserInfo(userInfo: any): void {
+  async setUserInfo(userInfo: any): Promise<void> {
     this.userInfo = userInfo;
-    localforage.setItem('userInfo', JSON.stringify(this.userInfo));
+    await localforage.setItem('userInfo', JSON.stringify(this.userInfo));
   }
 }

@@ -3,6 +3,7 @@ import {CommonModule} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {CookieService} from "../../../services/cookies/cookie.service";
 import {UserInfoService} from "../../../services/userInfo/userInfo.service";
+import localforage from "localforage";
 
 @Component({
   selector: 'app-home',
@@ -12,8 +13,8 @@ import {UserInfoService} from "../../../services/userInfo/userInfo.service";
 })
 export class HomeComponent {
   userInfo:any = null;
-  constructor(private userInfoService: UserInfoService) {
-    this.userInfo = this.userInfoService.getUserInfo();
+  constructor() {
+    this.userInfo = localforage.getItem('userInfo');
     if (!this.userInfo || Object.keys(this.userInfo).length === 0) {
       // Call API or initialize userInfo
       this.userInfo = {
@@ -21,7 +22,7 @@ export class HomeComponent {
         telegram_id: '12346879654365',
         stage: 0,
       };
-      this.userInfoService.setUserInfo(this.userInfo);
+      localforage.setItem('userInfo',this.userInfo);
     }
   }
   ngOnInit(){

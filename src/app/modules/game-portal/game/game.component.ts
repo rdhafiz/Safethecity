@@ -6,6 +6,7 @@ import { StageTwoComponent } from "./stages/stage-two/stage-two.component";
 import { StageThreeComponent } from "./stages/stage-three/stage-three.component";
 import { PopupComponent } from "./stages/popup/popup.component";
 import { UserInfoService } from "../../../services/userInfo/userInfo.service";
+import localforage from "localforage";
 
 @Component({
   selector: 'app-game',
@@ -40,13 +41,12 @@ export class GameComponent implements OnInit, OnDestroy {
     private loadingService: LoadingService,
     private router: Router,
     private route: ActivatedRoute,
-    private userInfoService: UserInfoService
   ) {}
 
   ngOnInit() {
     const stage = this.route.snapshot.paramMap.get('stage');
     console.log(stage)
-    this.userInfo = this.userInfoService.getUserInfo();
+    this.userInfo = localforage.getItem('userInfo');
     if (this.userInfo) {
       this.selectedStage = this.userInfo?.stage || 0;
       this.selectNextStage = this.selectedStage;
@@ -99,7 +99,7 @@ export class GameComponent implements OnInit, OnDestroy {
       this.userInfo.stage = this.selectNextStage;
     }
 
-    this.userInfoService.setUserInfo(this.userInfo);
+    localforage.setItem('userinfo', JSON.stringify(this.userInfo));
 
     let messageParam:any = {
       title: '',
