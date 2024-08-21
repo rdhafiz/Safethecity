@@ -33,7 +33,6 @@ constructor(private userInfoService:UserInfoService) {
     this.userInfoService.userInfo$.subscribe(userInfo => {
       this.userInfo = userInfo;
       setTimeout(() => {
-        console.log(this.userInfo)
         this.completedStages(this.userInfo?.stage)
       },500)
     });
