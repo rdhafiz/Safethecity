@@ -7,8 +7,19 @@ import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signO
 export class AuthService {
   constructor(private auth: Auth) {}
 
-  signUp(email: string, password: string) {
-    return createUserWithEmailAndPassword(this.auth, email, password);
+  async signUp(email: string, password: string) {
+    try {
+      // Try to create a new user
+      return await createUserWithEmailAndPassword(this.auth, email, password);
+    } catch (error: any) {
+      if (error.code === 'auth/email-already-in-use') {
+        // If the email is already in use, log the user in instead
+        return this.signIn(email, password);
+      } else {
+        // If it's another error, throw it
+        throw error;
+      }
+    }
   }
 
   signIn(email: string, password: string) {

@@ -3,6 +3,7 @@ import { NgOptimizedImage } from "@angular/common";
 import { LoadingService } from "../../../services/loading.service";
 import { Router } from '@angular/router';
 import {UserInfoService} from "../../../services/userInfo/userInfo.service";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -13,11 +14,11 @@ import {UserInfoService} from "../../../services/userInfo/userInfo.service";
   standalone: true
 })
 export class LoginComponent   {
-  duration: number = 3; // seconds
-  progress: number = 0;
-  progressPercentage: number = 0;
+  duration: any = 3; // seconds
+  progress: any = 0;
+  progressPercentage: any = 0;
   progressInterval: any = null;
-  constructor(private loadingService: LoadingService,private userInfoService: UserInfoService, private route:Router) {
+  constructor(private loadingService: LoadingService,private userInfoService: UserInfoService, private route:Router, private AuthService:AuthService) {
     this.loadData();
   }
 
@@ -46,17 +47,21 @@ export class LoginComponent   {
     this.loadingService.hide();
     let param:any = {
       username:'Default User',
-      telegram_id:123456879,
+      password:12345678,
+      email:'ridwan@gmail.com',
       stage:1,
       gameStage:0,
     }
-    this.userInfoService.removeItem('userInfo').then(value => {
-      this.userInfoService.setStoreValue('userInfo', param).then(r =>{
-        setTimeout(() => {
-          this.route.navigate(['/portal']);
-        },1000)
+    this.AuthService.signUp(param.email, param.password).then(v =>{
+      this.userInfoService.removeItem('userInfo').then(value => {
+        this.userInfoService.setStoreValue('userInfo', param).then(r =>{
+          setTimeout(() => {
+            this.route.navigate(['/portal']);
+          },1000)
+        })
       })
     })
+
 
 
   }
