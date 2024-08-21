@@ -4,6 +4,7 @@ import {HomeComponent} from "./modules/game-portal/home/home.component";
 import {GameComponent} from "./modules/game-portal/game/game.component";
 import {LayoutComponent} from "./modules/game-portal/layout/layout.component";
 import {StagesComponent} from "./modules/game-portal/game-statistics/stages.component";
+import {AuthGuard} from "./auth.guard";
 
 export const routes: Routes = [
   {

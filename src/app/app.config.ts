@@ -1,11 +1,15 @@
-import {ApplicationConfig, EnvironmentProviders, provideZoneChangeDetection} from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 
 import { routes } from './app.routes';
-import { provideClientHydration } from '@angular/platform-browser';
-import {LoadingComponent} from "./shared/loading/loading.component";
+import {environment} from "../environments/environment";
 
-export const appConfig: { imports: any[]; providers: EnvironmentProviders[] } = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(),],
-  imports:[LoadingComponent]
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => getAuth())
+  ]
 };
