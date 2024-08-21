@@ -2,6 +2,7 @@ import { Component, OnDestroy } from "@angular/core";
 import { NgOptimizedImage } from "@angular/common";
 import { LoadingService } from "../../../services/loading.service";
 import { Router } from '@angular/router';
+import {UserInfoService} from "../../../services/userInfo/userInfo.service";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent   {
   progress: number = 0;
   progressPercentage: number = 0;
   progressInterval: any = null;
-  constructor(private loadingService: LoadingService, private route:Router) {
+  constructor(private loadingService: LoadingService,private userInfoService: UserInfoService, private route:Router) {
     this.loadData();
   }
 
@@ -43,7 +44,21 @@ export class LoginComponent   {
     }
     this.progress = this.duration; // Ensure progress is set to 100%
     this.loadingService.hide();
-    this.route.navigate(['/portal']);
+    let param:any = {
+      username:'Default User',
+      telegram_id:123456879,
+      stage:1,
+      gameStage:1,
+    }
+    this.userInfoService.removeItem('userInfo').then(value => {
+      this.userInfoService.setStoreValue('userInfo', param).then(r =>{
+        setTimeout(() => {
+          this.route.navigate(['/portal']);
+        },1000)
+      })
+    })
+
+
   }
 
   ngOnDestroy() {

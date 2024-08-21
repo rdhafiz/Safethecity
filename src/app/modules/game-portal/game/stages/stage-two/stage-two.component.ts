@@ -16,8 +16,8 @@ export class StageTwoComponent implements OnInit {
   @Input() images: any[] = [];
   @Input() defaultImage: string = '';
   @Input() changeImageTo: string = '';
+  @Input() totalImages: number = 25;
 
-   totalImages: number = 9;
    clickedImages: Set<number> = new Set();
    timerStarted: boolean = false;
    timeoutId: any;

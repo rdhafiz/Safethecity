@@ -3,8 +3,8 @@
   <div class="game-stage">
     <div class="stage-parse w-100">
       <div class="box-container">
-        @for (item of boxArray; track item.id) {
-          <a [routerLink]="'/portal/stages/'+item.id" class="box" >
+        @for (item of totalStages; track item.stage) {
+          <a [routerLink]="'/portal/stages/'+item.stage" class="box" [ngClass]="{'disabled':item.completed}">
             {{ item.name }}
           </a>
         }

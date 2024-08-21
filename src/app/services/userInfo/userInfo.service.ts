@@ -1,47 +1,43 @@
-import { Injectable } from '@angular/core';
-import {CookieService} from "../cookies/cookie.service";
+import {Injectable} from '@angular/core';
 import * as localforage from "localforage";
-import {StorageService} from "../storage/storage.service";
-
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class UserInfoService {
-  private userInfo: any = null;
-  private isBrowser: boolean;
+  private userInfoSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public userInfo$ = this.userInfoSubject.asObservable(); // Expose as observable
 
   constructor() {
-    this.isBrowser = typeof window !== 'undefined';
-
-    this.loadUserInfo().then(r => {});
-  }
-
-  private async loadUserInfo(): Promise<void> {
-   localforage.getItem('userInfo').then((value:any) => {
-      if (value != null) {
-        console.log(value)
-        this.userInfo = JSON.parse(value);
-      } else {
-        // Initialize with default values if needed
-        this.userInfo = {
-          username: 'defaultUser',
-          telegram_id: '12346879654365',
-          stage: 0,
-        };
-         localforage.setItem('userInfo', JSON.stringify(this.userInfo));
+    this.loadUserInfo().then((r) => {
+      if (r != null) {
+        const parsedUserInfo = JSON.parse(r);
+        this.userInfoSubject.next(parsedUserInfo); // Update the BehaviorSubject
       }
     });
-
-
-
   }
 
-  getUserInfo(): any {
-    return this.userInfo;
+  async loadUserInfo() {
+    const info: any = await this.getStoreValue('userInfo');
+    return info;
   }
 
-  async setUserInfo(userInfo: any): Promise<void> {
-    this.userInfo = userInfo;
-    await localforage.setItem('userInfo', JSON.stringify(this.userInfo));
+  async getStoreValue(key: string) {
+    return await localforage.getItem(key);
+  }
+
+  async setStoreValue(key: string, value: any) {
+    await localforage.setItem(key, JSON.stringify(value));
+    this.userInfoSubject.next(value); // Update the BehaviorSubject
+  }
+
+  getUserInfo() {
+    return this.userInfoSubject.getValue();
+  }
+
+  async removeItem(key: string) {
+    await localforage.removeItem(key);
+    this.userInfoSubject.next(null); // Reset the BehaviorSubject
   }
 }
+
