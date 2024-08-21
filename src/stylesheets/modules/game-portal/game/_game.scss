@@ -43,6 +43,9 @@
           font-weight: 600;
           color: var(--bs-white);
           font-size: 16px;
+          &.disabled{
+            background-color:rgba(#dedede, 0.6);
+          }
 
           @media screen and (max-width: 991px) {
             width: 150px;

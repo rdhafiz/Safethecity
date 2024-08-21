@@ -2,10 +2,11 @@
 <section class="game w-100 h-100" style="background-image: url(/assets/images/ground-green.png)">
   <div class="game-stage">
     <div class="stage-parse w-100">
-      <div class="box-container">
+      @if(userInfo != null){
+        <div class="box-container">
         @for (item of totalStages; track item.stage) {
           @if (item.completed) {
-            <div class="box position-relative" [ngClass]="{'disabled' : item.completed}">
+            <div class="box position-relative" >
               <div
                 class="position-absolute top-0 bottom-0 start-0 end-0 d-flex justify-content-center align-items-center">
                 <svg viewBox="0 0 24 24" style="width: 45px; height: 45px;" fill="none"
@@ -21,12 +22,19 @@
               {{ item.name }}
             </div>
           } @else {
-            <a [routerLink]="'/portal/stages/'+item.stage" class="box" [ngClass]="{'d-none':item.completed}">
-              {{ item.name }}
-            </a>
+            @if(item.stage === this.userInfo.stage){
+              <a [routerLink]="'/portal/stages/'+item.stage" class="box" [ngClass]="{'d-none':item.completed}">
+                {{ item.name }}
+              </a>
+            }@else{
+              <div class="box disabled" >
+                {{ item.name }}
+              </div>
+            }
           }
         }
       </div>
+      }
     </div>
   </div>
 </section>

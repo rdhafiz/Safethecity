@@ -37,6 +37,7 @@ export class GameComponent implements OnInit, OnDestroy {
   images: any[] = [];
   defaultImage: string = '';
   changeImageTo: string = '';
+  stage: any = '';
 
   constructor(
     private loadingService: LoadingService,
@@ -46,10 +47,17 @@ export class GameComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.stage = this.route.snapshot.paramMap.get('stage');
+
     this.userInfoService.userInfo$.subscribe(userInfo => {
       this.userInfo = userInfo;
     });
     setTimeout(() => {
+      if(this.stage != this.userInfo.stage){
+        this.router.navigate(['/portal/stages']);
+        return
+      }
+
       this.selectedStage = this.userInfo.gameStage;
       this.selectNextStage = this.selectedStage;
       if(!this.gameStart){

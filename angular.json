@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "firebase-authentication": {
+    "safethecity": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/firebase-authentication",
+            "outputPath": "dist/safethecity",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "firebase-authentication:build:production"
+              "buildTarget": "safethecity:build:production"
             },
             "development": {
-              "buildTarget": "firebase-authentication:build:development"
+              "buildTarget": "safethecity:build:development"
             }
           },
           "defaultConfiguration": "development"
