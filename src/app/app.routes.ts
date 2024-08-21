@@ -29,7 +29,7 @@ export const routes: Routes = [
         component: GameComponent
       },
       {
-        path: 'congratulation',
+        path: 'stages/congratulation/:stage',
         component: CongratulationComponent
       },
     ]

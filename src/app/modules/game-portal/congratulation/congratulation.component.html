@@ -3,21 +3,18 @@
     <div
       class="animate__animated animate__bounceInDown d-flex justify-content-center align-items-center flex-column h-100">
       <div class="text-center h2 fw-bolder">
-        Congratulation
-        @if (true) {
-          {{ userInfo.username }}
-        }
+        Congratulations
+      </div>
+      <div class="h5 text-center fw-semibold">
+        You have successfully completed stage {{stage}}
       </div>
       <div class="h6 text-center fw-semibold">
-        Please start new stage
-      </div>
-      <div class="h6 text-center fw-semibold">
-        Click on the button below to new stage
+        To continue click on the button below
       </div>
     </div>
 
     <a [routerLink]="'/portal/stages'" class="btn btn-theme border-0 px-5 py-3">
-      New Stage
+      Game Statistics
     </a>
   }
 </section>

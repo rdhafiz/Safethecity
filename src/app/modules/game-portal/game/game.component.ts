@@ -119,6 +119,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   nextStage() {
+    let currentStage = this.userInfo.stage;
     this.gameStart = true;
     this.progress = 0;
     this.progressPercentage = 0;
@@ -134,7 +135,7 @@ export class GameComponent implements OnInit, OnDestroy {
         this.gameStart = false;
       }
       this.userInfoService.setStoreValue('userInfo', this.userInfo).then(r =>{
-        this.router.navigate(['/portal/stages']);
+        this.router.navigate(['/portal/stages/congratulation/'+currentStage]);
       })
     }
   }
