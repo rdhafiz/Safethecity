@@ -144,7 +144,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.defaultImage = defaultImage;
     this.changeImageTo = changeImageTo;
 
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 25; i++) {
       this.images.push({ src: defaultImage, id: i + 1, clicked: false });
     }
   }
