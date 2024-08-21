@@ -1,0 +1,14 @@
+<!-- Stages -->
+<section class="game w-100 h-100" style="background-image: url(/assets/images/ground-green.png)">
+  <div class="game-stage">
+    <div class="stage-parse w-100">
+      <div class="box-container">
+        @for (item of boxArray; track item.id) {
+          <a [routerLink]="'/portal/stages/'+item.id" class="box" >
+            {{ item.name }}
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+</section>
