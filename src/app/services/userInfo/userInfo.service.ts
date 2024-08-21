@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {CookieService} from "../cookies/cookie.service";
+import * as localforage from "localforage";
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +13,22 @@ export class UserInfoService {
   }
 
   private loadUserInfo(): void {
-    const cookieData = this.cookieService.getCookie('userInfo');
-    if (cookieData) {
-      this.userInfo = JSON.parse(cookieData);
-    } else {
-      // Initialize with default values if needed
-      this.userInfo = {
-        username: 'defaultUser',
-        telegram_id: '12346879654365',
-        stage: 0,
-      };
-      this.cookieService.setCookie('userInfo', JSON.stringify(this.userInfo), 1);
-    }
+    localforage.getItem('userInfo', (err, value) => {
+      // if err is non-null, we got an error. otherwise, value is the value
+      let storageData:any = value;
+      if (storageData != null) {
+        this.userInfo = JSON.parse(storageData);
+      } else {
+        // Initialize with default values if needed
+        this.userInfo = {
+          username: 'defaultUser',
+          telegram_id: '12346879654365',
+          stage: 0,
+        };
+        localforage.setItem('userInfo', JSON.stringify(this.userInfo));
+      }
+    });
+
   }
 
   getUserInfo(): any {
@@ -32,6 +37,6 @@ export class UserInfoService {
 
   setUserInfo(userInfo: any): void {
     this.userInfo = userInfo;
-    this.cookieService.setCookie('userInfo', JSON.stringify(this.userInfo), 1);
+    localforage.setItem('userInfo', JSON.stringify(this.userInfo));
   }
 }
