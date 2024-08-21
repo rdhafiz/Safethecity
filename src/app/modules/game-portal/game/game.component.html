@@ -3,15 +3,15 @@
     <!--Stage One-->
     @if (stages[selectedStage] == 1) {
       <app-stage-one (stage)="changeStage($event)" [images]="images" [totalImages]="images.length" [defaultImage]="defaultImage"
-                     [changeImageTo]="changeImageTo" [duration]="stagesDuration[selectedStage]"></app-stage-one>
+                     [changeImageTo]="changeImageTo" [duration]="stagesDuration"></app-stage-one>
     }
     @if (stages[selectedStage] == 2) {
       <app-stage-two (stage)="changeStage($event)" [images]="images" [totalImages]="images.length" [defaultImage]="defaultImage"
-                     [changeImageTo]="changeImageTo" [duration]="stagesDuration[selectedStage]"></app-stage-two>
+                     [changeImageTo]="changeImageTo" [duration]="stagesDuration"></app-stage-two>
     }
     @if (stages[selectedStage] == 3) {
       <app-stage-three (stage)="changeStage($event)" [images]="images" [totalImages]="images.length" [defaultImage]="defaultImage"
-                       [changeImageTo]="changeImageTo" [duration]="stagesDuration[selectedStage]"></app-stage-three>
+                       [changeImageTo]="changeImageTo" [duration]="stagesDuration"></app-stage-three>
     }
 
     <app-game-popup (clickEvent)="nextStage()"></app-game-popup>

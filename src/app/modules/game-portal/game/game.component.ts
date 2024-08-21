@@ -29,7 +29,7 @@ export class GameComponent implements OnInit, OnDestroy {
   progressPercentage: number = 0;
   progressInterval: any = null;
   stages: number[] = [1, 2, 3];
-  stagesDuration: any[] = [30, 30, 30];
+  stagesDuration: number = 5;
   selectNextStage: number = 0;
   selectedStage: any = 0;
   gameStart: boolean = false;
@@ -132,6 +132,15 @@ export class GameComponent implements OnInit, OnDestroy {
     this.progress = 0;
     this.progressPercentage = 0;
     this.selectedStage = this.selectNextStage;
+
+    if (currentStage == 1 || currentStage == 2 || currentStage == 3){
+      this.stagesDuration = 5
+    }else if(currentStage == 4 || currentStage == 5 || currentStage == 6){
+      this.stagesDuration = 4
+    }else{
+      this.stagesDuration = 3
+    }
+
     this.selectImage(this.selectedStage);
 
     if (this.stages[this.selectedStage] !== undefined) {

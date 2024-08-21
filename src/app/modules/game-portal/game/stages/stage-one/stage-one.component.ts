@@ -53,12 +53,15 @@ export class StageOneComponent implements OnInit {
   }
 
   startTimer() {
-    this.timeoutId = setTimeout(() => {
-      // Check if all images are clicked after the timer ends
-      if (this.clickedImages.size !== this.totalImages) {
-        this.showError();
+    this.timeoutId = setInterval(() => {
+      // Reset one random image every interval
+      this.resetOneRandomImage();
+
+      // If all images have been clicked, show success and clear the interval
+      if (this.clickedImages.size === this.totalImages) {
+        this.showSuccess();
+        clearInterval(this.timeoutId);
       }
-      this.reset()
     }, this.duration * 1000);
   }
 
@@ -70,13 +73,30 @@ export class StageOneComponent implements OnInit {
     console.log('Error! Not all images were clicked in time.');
   }
 
-  reset() {
-    this.images.forEach((v: any) => {
-      v.src = this.defaultImage;
-      v.clicked = false;
-    })
-    this.clickedImages.clear()
-    this.timerStarted = false
-    clearTimeout(this.timeoutId);
+  resetOneRandomImage() {
+    const clickedImages = Array.from(this.clickedImages);
+
+    if (clickedImages.length > 0) {
+      // Select a random image from the clicked images
+      const randomIndex = Math.floor(Math.random() * clickedImages.length);
+      const randomImageId = clickedImages[randomIndex];
+
+      // Find the image in the images array and reset it
+      const imageToReset = this.images.find((img: any) => img.id === randomImageId);
+      if (imageToReset) {
+        imageToReset.src = this.defaultImage;
+        imageToReset.clicked = false;
+      }
+
+      // Remove the reset image from the clickedImages set
+      this.clickedImages.delete(randomImageId);
+    }
+
+    // If all images are reset, clear the timer
+    if (this.clickedImages.size === 0) {
+      this.timerStarted = false;
+      clearInterval(this.timeoutId);
+    }
   }
+
 }
