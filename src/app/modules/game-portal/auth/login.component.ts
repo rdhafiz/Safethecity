@@ -48,7 +48,7 @@ export class LoginComponent   {
       username:'Default User',
       telegram_id:123456879,
       stage:1,
-      gameStage:1,
+      gameStage:0,
     }
     this.userInfoService.removeItem('userInfo').then(value => {
       this.userInfoService.setStoreValue('userInfo', param).then(r =>{

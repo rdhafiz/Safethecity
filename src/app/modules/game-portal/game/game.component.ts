@@ -29,9 +29,10 @@ export class GameComponent implements OnInit, OnDestroy {
   progressPercentage: number = 0;
   progressInterval: any = null;
   stages: number[] = [1, 2, 3];
-  stagesDuration: number[] = [15, 10, 7];
+  stagesDuration: any[] = [30, 30, 30];
   selectNextStage: number = 0;
   selectedStage: any = 0;
+  gameStart: boolean = false;
 
   images: any[] = [];
   defaultImage: string = '';
@@ -41,18 +42,20 @@ export class GameComponent implements OnInit, OnDestroy {
     private loadingService: LoadingService,
     private router: Router,
     private route: ActivatedRoute,
+    private userInfoService: UserInfoService,
   ) {}
 
   ngOnInit() {
-    const stage = this.route.snapshot.paramMap.get('stage');
-    console.log(stage)
-    this.userInfo = localforage.getItem('userInfo');
-    if (this.userInfo) {
-      this.selectedStage = this.userInfo?.stage || 0;
+    this.userInfoService.userInfo$.subscribe(userInfo => {
+      this.userInfo = userInfo;
+    });
+    setTimeout(() => {
+      this.selectedStage = this.userInfo.gameStage;
       this.selectNextStage = this.selectedStage;
-      this.nextStage()
-    }
-
+      if(!this.gameStart){
+        this.nextStage()
+      }
+    },500)
   }
 
   ngOnDestroy() {
@@ -93,13 +96,12 @@ export class GameComponent implements OnInit, OnDestroy {
   changeStage(stage: number = 0) {
     this.selectNextStage = stage;
 
-    if (this.selectNextStage > 2) {
-      this.userInfo.stage = 0;
+    if (this.selectNextStage > 3) {
+      this.userInfo.gameStage = 0;
     } else {
-      this.userInfo.stage = this.selectNextStage;
+      this.userInfo.gameStage = this.selectNextStage;
     }
-
-    localforage.setItem('userinfo', JSON.stringify(this.userInfo));
+    this.userInfoService.setStoreValue('userInfo',this.userInfo)
 
     let messageParam:any = {
       title: '',
@@ -117,6 +119,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   nextStage() {
+    this.gameStart = true;
     this.progress = 0;
     this.progressPercentage = 0;
     this.selectedStage = this.selectNextStage;
@@ -125,7 +128,14 @@ export class GameComponent implements OnInit, OnDestroy {
     if (this.stages[this.selectedStage] !== undefined) {
       this.pageLoading();
     } else {
-      this.router.navigate(['/portal']);
+      if(this.userInfo.stage < 10){
+        this.userInfo.gameStage = 0;
+        this.userInfo.stage = this.userInfo.stage + 1;
+        this.gameStart = false;
+      }
+      this.userInfoService.setStoreValue('userInfo', this.userInfo).then(r =>{
+        this.router.navigate(['/portal/stages']);
+      })
     }
   }
 

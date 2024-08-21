@@ -32,7 +32,10 @@ constructor(private userInfoService:UserInfoService) {
   ngOnInit():void {
     this.userInfoService.userInfo$.subscribe(userInfo => {
       this.userInfo = userInfo;
-      this.completedStages(this.userInfo?.stage)
+      setTimeout(() => {
+        console.log(this.userInfo)
+        this.completedStages(this.userInfo?.stage)
+      },500)
     });
   }
   completedStages(stage:number){
