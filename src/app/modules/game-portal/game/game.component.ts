@@ -1,6 +1,6 @@
-import { Component, ViewChild, OnDestroy, OnInit } from "@angular/core";
+import {Component, ViewChild, OnDestroy, OnInit, viewChild} from "@angular/core";
 import { LoadingService } from "../../../services/loading.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { StageOneComponent } from "./stages/stage-one/stage-one.component";
 import { StageTwoComponent } from "./stages/stage-two/stage-two.component";
 import { StageThreeComponent } from "./stages/stage-three/stage-three.component";
@@ -39,16 +39,20 @@ export class GameComponent implements OnInit, OnDestroy {
   constructor(
     private loadingService: LoadingService,
     private router: Router,
+    private route: ActivatedRoute,
     private userInfoService: UserInfoService
   ) {}
 
   ngOnInit() {
+    const stage = this.route.snapshot.paramMap.get('stage');
+    console.log(stage)
     this.userInfo = this.userInfoService.getUserInfo();
     if (this.userInfo) {
       this.selectedStage = this.userInfo?.stage || 0;
       this.selectNextStage = this.selectedStage;
       this.nextStage()
     }
+
   }
 
   ngOnDestroy() {

@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {NgClass} from "@angular/common";
-import {Router, RouterLink} from "@angular/router";
+import {RouterLink} from "@angular/router";
 import {HeaderComponent} from "../includes/header.component";
 
 @Component({
@@ -14,8 +14,8 @@ import {HeaderComponent} from "../includes/header.component";
   standalone: true
 })
 export class StagesComponent implements OnInit {
-  ngOnInit() {
 
+  ngOnInit():void {
   }
 
   boxArray: any = [
