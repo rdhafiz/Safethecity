@@ -1,10 +1,15 @@
-
 <!--Stage One-->
 <div class="game-stage stage-one">
   <div class="text-center h4 fw-semibold mb-3 text-white">Green the field</div>
   <div class="stage-parse">
-    @for (img of images; track img.id) {
-      <img [src]="'./assets/images/'+img.src" class="ground ground-1" [ngClass]="{'border-transparent': img.clicked}" [alt]="'ground ' + img.id " (click)="changeLand(img)" style="object-fit: cover">
-    }
+    <div class="image-container">
+      @for (img of images; track img.id) {
+        <div class="overflow-hidden image-item">
+          <img [src]="'./assets/images/'+img.src" class="ground ground-1"
+               [ngClass]="{'border-transparent animate__animated animate__bounceIn': img.clicked}"
+               [alt]="'ground ' + img.id " (click)="changeLand(img)" style="object-fit: cover">
+        </div>
+      }
+    </div>
   </div>
 </div>
