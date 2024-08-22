@@ -1,5 +1,6 @@
 .game{
   height: calc(100vh - 80px);
+
   .game-stage{
     width: 100%;
     height: calc(100vh - 100px);
@@ -7,6 +8,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
     .stage-parse {
       width: 35%;
       height: auto;
@@ -14,22 +16,28 @@
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
+
       @media screen and (max-width: 991px) {
         width: 55%;
       }
+
       @media screen and (max-width: 768px) {
         width: 65%;
       }
+
       @media screen and (max-width: 576px) {
         width: 85%;
       }
+
       @media screen and (max-width: 375px) {
         width: 100%;
       }
+
       .box-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 3px;
+
         .box {
           text-decoration: none;
           width: 140px;
@@ -43,6 +51,7 @@
           font-weight: 600;
           color: var(--bs-white);
           font-size: 16px;
+
           &.disabled{
             background-color: rgba(255, 255, 255, 0.3);
           }
@@ -51,29 +60,41 @@
             width: 150px;
             height: 150px;
           }
+
           @media screen and (max-width: 768px) {
             width: 105px;
             height: 105px;
           }
+
           @media screen and (max-width: 576px) {
             width: 85px;
             height: 85px;
           }
+
         }
+
       }
+
       .image-container {
         width: 100%;
         display: grid;
         grid-template-columns: repeat(5, 1fr);
+
         .image-item {
           border: 1px solid rgba(255,255,255,0.3);
+
           img{
             width: 100%;
             height: auto;
             object-fit: contain;
           }
+
         }
+
       }
+
     }
+
   }
+
 }
